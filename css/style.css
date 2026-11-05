@@ -85,14 +85,14 @@ body {
 .relogio-hora {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--text-color, #333);
+  color: var(--text-main);
   line-height: 1.1;
   margin-bottom: 4px;
 }
 
 .relogio-data {
   font-size: 1rem;
-  color: var(--text-muted, #666);
+  color: var(--text-main);
 }
 
 /* AUXILIARES COM JS */
