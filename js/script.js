@@ -44,6 +44,37 @@ if (myLoginForm) {
   });
 }
 
+function obterConselho() {
+  fetch("https://api.adviceslip.com/advice")
+    .then((response) => response.json())
+    .then((data) => {
+      conselhoEmIngles = data.slip.advice;
+      //console.log("Original: " + conselhoEmIngles);
+
+      const params = new URLSearchParams({
+        q: conselhoEmIngles,
+        langpair: "en|pt",
+      });
+      return fetch(`https://api.mymemory.translated.net/get?${params}`);
+    })
+    .then((responseTraducao) => responseTraducao.json())
+    .then((dataTraducao) => {
+      const traducao = dataTraducao.responseData.translatedText;
+      // console.log("Traduzido: " + traducao);
+      if (myConselho) {
+        myConselho.textContent = '"' + traducao + '"';
+      }
+    })
+    .catch((erro) => {
+      console.error("Erro no processo do conselho:", erro);
+      // Mensagem de contingência caso a internet ou as APIs falhem
+      if (myConselho) {
+        myConselho.textContent =
+          '"Não te esqueças de planear as tuas despesas com cabeça!"';
+      }
+    });
+}
+
 if (registeredUser) {
   const userTheme = localStorage.getItem(registeredUser + "_theme") || "light";
   myUserSpan.textContent = registeredUser;
@@ -78,7 +109,7 @@ function atualizarDataHora() {
   }
 }
 
-// Iniciar imediatamente e definir o ciclo de 1 segundo
+// Inicia imediatamente e define o ciclo de 1 segundo
 atualizarDataHora();
 setInterval(atualizarDataHora, 1000);
 
@@ -189,15 +220,18 @@ function actualizarDespesas(lista) {
     myValor += artigo.valor;
 
     const novaDespesa = document.createElement("tr");
-    novaDespesa.dataset.id = artigo.id; // pagar guardar o ID na BD
+    novaDespesa.dataset.id = artigo.id; // para guardar o ID na BD
 
     const celulaDescricao = document.createElement("td");
+    celulaDescricao.setAttribute("data-label", "Descrição");
     celulaDescricao.textContent = artigo.descricao;
 
     const celulaValor = document.createElement("td");
+    celulaValor.setAttribute("data-label", "Valor"); 
     celulaValor.textContent = artigo.valor.toFixed(2) + "€";
 
     const celulaCategoria = document.createElement("td");
+    celulaCategoria.setAttribute("data-label", "Categoria"); 
     const myBadge = document.createElement("span");
     myBadge.className = "badge";
     myBadge.textContent = artigo.categoriaTexto;
@@ -205,6 +239,7 @@ function actualizarDespesas(lista) {
     celulaCategoria.appendChild(myBadge);
 
     const celulaCriador = document.createElement("td");
+    celulaCriador.setAttribute("data-label", "Criado por"); 
     celulaCriador.textContent = artigo.criadoPor;
 
     const celulaAccoes = document.createElement("td");
@@ -250,12 +285,17 @@ function editarLinha(button) {
 
   const artigoOriginal = listaDespesas.find((item) => item.id == idBD);
 
+  elemento[0].setAttribute("data-label", "Descrição");
   elemento[0].innerHTML = `<input type="text" value="${artigoOriginal.descricao}">`;
+
+  elemento[1].setAttribute("data-label", "Valor");
   elemento[1].innerHTML = `<input type="number" step="0.01" value="${artigoOriginal.valor}">`;
 
   const categoriaAtual = artigoOriginal.categoriaValor || "";
+  elemento[2].setAttribute("data-label", "Categoria");
   elemento[2].innerHTML = "";
   const mySelect = document.createElement("select");
+  mySelect.className = "edit-categoria";
 
   const opcoes = [
     { valor: "Alimentacao", texto: "Alimentação" },
@@ -267,7 +307,7 @@ function editarLinha(button) {
   ];
 
   opcoes.forEach(function (opcao) {
-    const myOpcao = document.createElement("myOpcao");
+    const myOpcao = document.createElement("option");
 
     myOpcao.value = opcao.valor;
     myOpcao.textContent = opcao.texto;
@@ -345,33 +385,4 @@ if (selectFiltro) {
   });
 }
 
-function obterConselho() {
-  fetch("https://api.adviceslip.com/advice")
-    .then((response) => response.json())
-    .then((data) => {
-      conselhoEmIngles = data.slip.advice;
-      //console.log("Original: " + conselhoEmIngles);
 
-      const params = new URLSearchParams({
-        q: conselhoEmIngles,
-        langpair: "en|pt",
-      });
-      return fetch(`https://api.mymemory.translated.net/get?${params}`);
-    })
-    .then((responseTraducao) => responseTraducao.json())
-    .then((dataTraducao) => {
-      const traducao = dataTraducao.responseData.translatedText;
-      // console.log("Traduzido: " + traducao);
-      if (myConselho) {
-        myConselho.textContent = '"' + traducao + '"';
-      }
-    })
-    .catch((erro) => {
-      console.error("Erro no processo do conselho:", erro);
-      // Mensagem de contingência caso a internet ou as APIs falhem
-      if (myConselho) {
-        myConselho.textContent =
-          '"Não te esqueças de planear as tuas despesas com cabeça!"';
-      }
-    });
-}

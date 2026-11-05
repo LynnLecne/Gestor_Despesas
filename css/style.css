@@ -415,3 +415,111 @@ th {
   color: var(--text-main);
   line-height: 1.4;
 }
+
+@media screen and (max-width: 600px) {
+  
+  /* Esconde o cabeçalho original da tabela */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead {
+    display: none;
+  }
+  
+  /* Transforma cada linha (tr) num cartão individual */
+  tr {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  
+  /* Organiza cada célula do cartão */
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border: none !important;
+  }
+  
+  /* Cria uma etiqueta automática para saber o que é cada dado */
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #4a5568;
+    font-size: 14px;
+  }
+  
+  /* Garante que os inputs ocupam o espaço correto ao editar */
+  td input, td select {
+    width: 60%;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+
+  /* Alinha os botões (Editar/Apagar ou Guardar/Cancelar) lado a lado no fim do cartão */
+  td:last-child {
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+    border-top: 1px solid #edf2f7 !important;
+    padding-top: 10px;
+  }
+  
+  td:last-child::before {
+    display: none; /* Remove a etiqueta na coluna dos botões */
+  }
+
+  .app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente as duas divs principais */
+    text-align: center;  /* Centra todos os textos inline */
+    gap: 15px;
+    width: 100%;
+  }
+
+  /* 2. Garante o alinhamento ao centro na zona da esquerda */
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* 3. Centra a zona da direita (relógio e botões) */
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra os botões e o relógio no meio */
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* 4. Alinhamento interno do relógio e data */
+  #data-hora-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .relogio-hora {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  /* 5. Ajuste opcional para os botões ficarem alinhados de forma consistente */
+  #theme-toggle, #logout-btn {
+    width: auto;
+    min-width: 160px; /* Dá uma largura mínima igual para ficarem simétricos */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+  }
+}
