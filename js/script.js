@@ -54,6 +54,35 @@ if (registeredUser) {
   carregarDespesas();
 }
 
+function atualizarDataHora() {
+  const elementoData = document.querySelector(".relogio-data");
+  const elementoHora = document.querySelector(".relogio-hora");
+  
+  if (elementoData && elementoHora) {
+    const agora = new Date();
+    
+    const dataFormatada = agora.toLocaleDateString("pt-PT", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+    
+    const horaFormatada = agora.toLocaleTimeString("pt-PT", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    });
+    
+    elementoData.textContent = dataFormatada;
+    elementoHora.textContent = horaFormatada;
+  }
+}
+
+// Iniciar imediatamente e definir o ciclo de 1 segundo
+atualizarDataHora();
+setInterval(atualizarDataHora, 1000);
+
+
 if (myThemeBtn) {
   myThemeBtn.addEventListener("click", () => {
     const myCurrentTheme = document.documentElement.getAttribute("data-theme");

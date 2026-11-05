@@ -27,6 +27,29 @@
     --shadow: 0 4px 6px rgba(0,0,0,0.4);
 }
 
+#theme-toggle {
+    background-color: var(--bg-primary);     
+    color: var(--text-main);               
+    border: 1px solid var(--border-color);   
+    padding: 10px 16px;                      
+    border-radius: 8px;                   
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;                                
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);  
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--border-color);  
+    cursor: pointer;
+}
+
+#theme-toggle:active {
+    transform: scale(0.98);                 
+}
 /* RESET E ESTILOS GERAIS */
 * {
     margin: 0;
@@ -44,6 +67,30 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+}
+
+
+#data-hora-container {
+  display: inline-flex;
+  flex-direction: column-reverse; 
+  align-items: flex-end;       
+  text-align: right;
+  font-family: sans-serif;
+}
+
+
+.relogio-hora {
+  font-size: 2rem;               
+  font-weight: bold;          
+  color: var(--text-color, #333); 
+  line-height: 1.1;
+  margin-bottom: 4px;            
+}
+
+
+.relogio-data {
+  font-size: 1rem;    
+  color: var(--text-muted, #666);
 }
 
 /* AUXILIARES COM JS */
@@ -99,24 +146,42 @@ body {
     gap: 10px;
 }
 
-/* RESUMO / BALANÇO */
 .summary-section {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .balance-card {
-    background: linear-gradient(135deg, var(--primary-color), #3498db);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
+    background: var(--bg-card);
+    color: var(--text-main);
+    padding: 20px 24px;
+    border-radius: 10px;
     display: inline-block;
-    min-width: 250px;
+    min-width: 280px;
+    border: 1px solid var(--border-color);
+    /* Uma barra lateral verde minimalista para dar identidade sem agredir */
+    border-left: 5px solid var(--primary-color); 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    text-align: left;
 }
 
+/* Texto descritivo ("TOTAL GASTO") */
+.balance-card h3, .balance-card font {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* O Valor Numérico (Agora num tom cinza-escuro/antracite muito suave) */
 .balance-card p {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 5px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 6px;
+    /* Usa a variável de texto principal para garantir repouso visual */
+    color: var(--text-main); 
+    letter-spacing: -0.5px;
+    line-height: 1;
 }
 
 /* LAYOUT DO CONTEÚDO */
