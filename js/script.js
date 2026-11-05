@@ -40,6 +40,7 @@ if (myLoginForm) {
       myMain.classList.remove("hidden");
       myLoginContainer.classList.add("hidden");
       carregarDespesas();
+      obterConselho();
     }
   });
 }
@@ -48,7 +49,7 @@ function obterConselho() {
   fetch("https://api.adviceslip.com/advice")
     .then((response) => response.json())
     .then((data) => {
-      conselhoEmIngles = data.slip.advice;
+      const conselhoEmIngles = data.slip.advice;
       //console.log("Original: " + conselhoEmIngles);
 
       const params = new URLSearchParams({
