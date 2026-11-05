@@ -15,6 +15,15 @@ const myList = document.getElementById("expense-list");
 
 let listaDespesas = [];
 let categoriaFiltroAtivo = "all";
+const registeredUser = localStorage.getItem("user");
+
+let temaInicial = "light";
+if (registeredUser) {
+  temaInicial = localStorage.getItem(registeredUser + "_theme") || "light";
+} else {
+  temaInicial = localStorage.getItem("theme") || "light";
+}
+document.documentElement.setAttribute("data-theme", temaInicial);
 
 if (myLoginForm) {
   myLoginForm.addEventListener("submit", function (e) {
@@ -35,7 +44,6 @@ if (myLoginForm) {
   });
 }
 
-const registeredUser = localStorage.getItem("user");
 if (registeredUser) {
   const userTheme = localStorage.getItem(registeredUser + "_theme") || "light";
   myUserSpan.textContent = registeredUser;
@@ -44,6 +52,31 @@ if (registeredUser) {
   myLoginContainer.classList.add("hidden");
   obterConselho();
   carregarDespesas();
+}
+
+if (myThemeBtn) {
+  myThemeBtn.addEventListener("click", () => {
+    const myCurrentTheme = document.documentElement.getAttribute("data-theme");
+    let newTheme;
+
+    if (myCurrentTheme === "dark") {
+      newTheme = "light";
+    } else {
+      newTheme = "dark";
+    }
+    document.documentElement.setAttribute("data-theme", newTheme);
+
+    const currentUser = localStorage.getItem("user");
+    if (currentUser) {
+      localStorage.setItem(currentUser + "_theme", newTheme);
+    }
+  });
+}
+
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+} else {
+  document.documentElement.setAttribute("data-theme", "light");
 }
 
 if (myLogout) {
@@ -256,7 +289,6 @@ async function guardarLinha(button) {
 function cancelarLinha(button) {
   actualizarDespesas(listaDespesas);
 }
-
 
 async function apagarLinha(button) {
   if (!confirm("Tem a certeza que deseja apagar esta despesa?")) return;
