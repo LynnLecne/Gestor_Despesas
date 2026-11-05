@@ -336,7 +336,7 @@ function obterConselho() {
       // console.log("Traduzido: " + traducao);
       if (myConselho) {
         myConselho.textContent = '"' + traducao + '"';
-      }
+      } 
     })
     .catch((erro) => {
       console.error("Erro no processo do conselho:", erro);
