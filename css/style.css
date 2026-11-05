@@ -1,0 +1,348 @@
+/* VARIÁVEIS DE COR E TEMAS */
+:root[data-theme="light"] {
+    --bg-primary: #f4f7f6;
+    --bg-card: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --border-color: #dddddd;
+    --primary-color: #2ecc71;
+    --primary-hover: #27ae60;
+    --danger-color: #e74c3c;
+    --danger-hover: #c0392b;
+    --edit-color: #f1c40f;
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+:root[data-theme="dark"] {
+    --bg-primary: #1e1e24;
+    --bg-card: #2a2a35;
+    --text-main: #f5f5f5;
+    --text-muted: #aaaaaa;
+    --border-color: #44444c;
+    --primary-color: #2ecc71;
+    --primary-hover: #27ae60;
+    --danger-color: #e74c3c;
+    --danger-hover: #c0392b;
+    --edit-color: #f39c12;
+    --shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+/* RESET E ESTILOS GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* AUXILIARES COM JS */
+.hidden {
+    display: none !important;
+}
+
+/* CONTAINER DE LOGIN */
+.auth-card {
+    background-color: var(--bg-card);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-card h2 {
+    margin-bottom: 24px;
+}
+
+/* ESTRUTURA DA APLICAÇÃO */
+.main-app {
+    width: 100%;
+    max-width: 1100px;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+/* CABEÇALHO */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.meta-info {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+    display: flex;
+    gap: 15px;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* RESUMO / BALANÇO */
+.summary-section {
+    margin-bottom: 30px;
+}
+
+.balance-card {
+    background: linear-gradient(135deg, var(--primary-color), #3498db);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: inline-block;
+    min-width: 250px;
+}
+
+.balance-card p {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* LAYOUT DO CONTEÚDO */
+.app-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .app-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* FORMULÁRIOS */
+.form-section h2, .list-header h2 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+}
+
+/* BOTÕES */
+button {
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+}
+
+/* TABELA DE DESPESAS */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-group select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--bg-primary);
+    color: var(--text-muted);
+}
+
+/* DISTINTIVOS E AÇÕES DA TABELA */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white; /* Texto em branco para destacar sobre as cores */
+}
+
+/* CORES ESPECÍFICAS POR CATEGORIA */
+.cat-alimentacao {
+    background-color: #e67e22; /* Laranja */
+}
+
+.cat-educacao {
+    background-color: rgb(236, 178, 188);
+}
+
+.cat-habitacao {
+    background-color: #3498db; /* Azul */
+}
+
+.cat-transportes {
+    background-color: #9b59b6; /* Roxo */
+}
+
+.cat-lazer {
+    background-color: rgb(221, 63, 63);
+}
+
+.cat-outros {
+    background-color: #7f8c8d; /* Cinzento */
+}
+
+.btn-edit {
+    background-color: var(--edit-color);
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+}
+
+.btn-delete {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+}
+
+.btn-guardar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+}
+.btn-cancelar {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+}
+#expense-list input[type="text"] {
+    width: 140px; /* Tamanho confortável para a descrição */
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#expense-list input[type="number"] {
+    width: 70px; /* O preço é curto, não precisa de muito espaço */
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#expense-list select {
+    width: 130px; /* Tamanho ideal para o menu de categorias */
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+#expense-list button:hover {
+    filter: brightness(0.9);
+}
+
+/* WIDGET DE CONSELHOS */
+.advice-box {
+    margin-top: 10px;
+    padding: 12px 15px;
+    background-color: var(--bg-primary);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+    max-width: 500px;
+}
+
+.advice-box small {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.advice-box p {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
